@@ -1,4 +1,5 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
+import { ApiServices } from './api/api.service';
 
 @Component({
   selector: 'app-root',
@@ -6,5 +7,15 @@ import { Component } from '@angular/core';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
-  title = 'proyecto';
+  
+  apis: any;
+
+  constructor(public api:ApiServices){}
+
+  ngOnInit(){
+    this.api.getApi().subscribe(
+      (r) => { this.apis = r; console.log(r) },
+      (e) => { console.error(e) }
+    )
+  }
 }
